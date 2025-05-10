@@ -4,7 +4,9 @@ import java.awt.Image;
 import java.awt.event.*;
 import java.util.Arrays;
 import javax.swing.*;
-//Wite a short description of what you have been doing as well
+// does this work? testing how to udtate code
+
+//Write a short description of what you have been doing as well
 //Landon Bisson Time=11.5 hours (Designed the logo, fixed players dsiplayed, helped create acessors to start getting attcks ready)
 //Wesley Richey Time=2 hours (made FindAdjacent, Heal, ModifyHealth, and GetHealth)
 //Niko Calabro Time=5 hours (did a lot of chracterclass stuff like reorginzation and naming some atacks/abilities)
