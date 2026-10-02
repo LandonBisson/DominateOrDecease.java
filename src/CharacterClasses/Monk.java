@@ -7,6 +7,8 @@ class Monk extends CharacterClass{
     private int healthSave;
     //0 means its a person attack, 1 is a tile attack, and 2 is no attack or attack everyone(aka nothing passed in)
     private static int[] _selectingTile={0,2,2};
+    Monk(){
+        super(className,0,_selectingTile,2);
 
     
     Monk(){
@@ -55,7 +57,6 @@ class Monk extends CharacterClass{
         mod = 4;
     }
     void EndTurn(){
-
         FoB = 1;
         mod = 1;
         if (Meditate == 2)

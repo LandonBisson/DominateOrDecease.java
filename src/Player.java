@@ -236,6 +236,10 @@ public class Player {
         int count = 0;
         for(boolean a : orb){
         if (a)
+            count++;
+        int count = 0;
+        for(boolean a : orb){
+        if (a)
             count ++;
         }
         return (count);
@@ -278,21 +282,20 @@ public class Player {
             return;
         }
         //you took damage lets see if you have a damage reduction, and finalize health
-        health += healthChange + getDamageReduction();
-
-        // if you died
-        if (health <= 0) {
+        health += healthChange;
+        if (healthChange < 0)
+            health += getDamageReduction();
+        if (health > MaxHealth)
+            health = MaxHealth;
+        else if (health <= 0) {
             numPlayers--;
-
-            //remove placeables
-            Placeables.removeEveryCreated(Player.getCurrentPlayer());
             Tile.getTile(tileNum).setNumPlayers(Tile.getTile(tileNum).getNumPlayers() - 1);
-            //remove stuff than set gameover
-            if(numPlayers<=1) {
+            Placeables.removeEveryCreated(Player.getCurrentPlayer());
+            if(Player.getNumPlayers()<=1)
                 DominateOrDecease.setGameOver(true);
-                return;
-            }
-            //if the game isnt over keep moving on
+            players.remove(this);
+            DominateOrDecease.getNextPlayer();
+        }
             players.remove(this);
             DominateOrDecease.getNextPlayer();
         }

@@ -131,7 +131,7 @@ public class Board {
             else{
                 drawActive=i;
             }
-
+            //
         }
         drawInfoBox(g, x, y, drawActive, Color.green);
 

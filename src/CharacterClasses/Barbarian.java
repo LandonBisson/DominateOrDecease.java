@@ -50,6 +50,7 @@ class Barbarian extends CharacterClass{
         RAGE[1] = 2;
         //turns of rage
         RAGE[2] = 2.0;
+        RAGE[2] = 2.0;
     }
 
 

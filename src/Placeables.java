@@ -32,15 +32,18 @@ abstract class Placeables {
     }
     public static void removeEveryCreated(Player createdThis){
         if (createdThis == null) {
-            System.out.println("NullPo in Placebels first if"); //probably dont need this check but better safe than sorry
+        if (createdThis == null) {
+            System.out.println("NullPo in Placebels first if");
             return;
         }
         for(int i=0;i<allPlace.size();i++){
             if (allPlace.get(i) != null) {
-                System.out.println("NullPo in Placebels second if");
-                return;
+                if(allPlace.get(i).getCreatedThis().equals(createdThis)) {
+                    allPlace.remove(allPlace.get(i));
+                    return;
+                }
             }
-            if(allPlace.get(i).getCreatedThis().equals(createdThis)) {
+        }
                 allPlace.remove(allPlace.get(i));
             }
         }

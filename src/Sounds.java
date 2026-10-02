@@ -7,8 +7,6 @@ public class Sounds implements Runnable{
     public boolean donePlaying = false;
     public boolean stopPlaying = false;
     public boolean pausePlaying = false;
-//    private static Sounds falcon=null;
-//    private static Sounds[][] soundEffects = new Sounds[9][3];
     private static String[][] sounds = new String[9][3];
     private static String falcon = null;
     Sounds(String _name)
@@ -22,7 +20,6 @@ public class Sounds implements Runnable{
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundFile);
             AudioFormat format = ais.getFormat();
-            //    System.out.println("Format: " + format);
             DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
             SourceDataLine source = (SourceDataLine) AudioSystem.getLine(info);
             source.open(format);
@@ -70,10 +67,4 @@ public class Sounds implements Runnable{
                 new Sounds(sounds[i][type]);
         }
     }
-
 }
-
-
-
-
-

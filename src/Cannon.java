@@ -64,7 +64,6 @@ class Cannon extends Placeables{
                             return false;
                         }
                     }
-
                     CharacterClass.DealDamage(damage, Player.getPlayer(random));
                     DominateOrDecease.setInfoBoard("Cannon hit "+Player.getPlayer(random).getCharacterClass().getName()+ " for "+damage+" damage." , 2,Window.getHeight2()/2+300);
                 } else {

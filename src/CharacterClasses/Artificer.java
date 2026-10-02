@@ -51,7 +51,7 @@ class Artificer extends CharacterClass {
     }
 
     void Attack(int tile) {
-        int dam=Dice.RollDie(1,2,0);
+        int dam=Dice.RollDie(1,2,cannonLevel);
         for (Player ptr : Tile.getTile(tile).getPlayerPtrs())
             DealDamage(dam,ptr);
         if(!Tile.getTile(Player.getCurrentPlayer().currTile()).isFull()) {

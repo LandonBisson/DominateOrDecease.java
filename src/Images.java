@@ -93,9 +93,8 @@ public class Images {
         tiles[5]=Toolkit.getDefaultToolkit().getImage("src/Images/a_tile5.PNG");
         tiles[6]=Toolkit.getDefaultToolkit().getImage("src/Images/a_tile6 .PNG");
 
-        mute[0] = Toolkit.getDefaultToolkit().getImage("src/Images/muted.png"); //volume off
-        mute[1] = Toolkit.getDefaultToolkit().getImage("src/Images/unmuted.png"); // volume on
-        //supers[0]=Toolkit.getDefaultToolkit().getImage("src/Images/a_ArtificerAttack.JPG");
+        mute[0] = Toolkit.getDefaultToolkit().getImage("src/Images/muted.png");
+        mute[1] = Toolkit.getDefaultToolkit().getImage("src/Images/unmuted.png");
     }
     public static void reset(){
         FlameYpos=Window.getYNormal(Window.getHeight2() / 6+5);
@@ -106,14 +105,13 @@ public class Images {
         drawImage(g,cobble,(Window.getWidth2()/2)+50,Window.getHeight2()/2,0,3,3);
         drawMute(g);
         drawImage(g,logo,(Window.getWidth2()/2),Window.getHeight2()/2,0,0.5,0.5);
-        if (!DominateOrDecease.displayRules)
-            displayPressR(g);
         drawFlame(g);
         drawImage(g,START,(Window.getWidth2()/2),Window.getYNormal(Window.getHeight2()/6),0,0.25,0.25);
+        if (!DominateOrDecease.displayRules)
+            displayPressR(g);
         if(DominateOrDecease.displayRules){
             displayRules(g);
         }
-
     }
     public static void drawMute(Graphics2D g){
         int imageWidth = (int)(Images.getMuteImage(DominateOrDecease.mute).getWidth(DominateOrDecease.frame)/2.5);

@@ -115,7 +115,7 @@ private static CharacterClass currentHoveredClass;
         int width = Board.getCharacterBoxX()/2;
         int height = 105;
 
-        int startX = Window.getX(80 * Window.getWidth2() / 100) + width/2; // same x-value as on middle vertical line
+        int startX = Window.getX(80 * Window.getWidth2() / 100) + width/2;
         int startY = Window.getY(72 * Window.getHeight2() / 100)+3+height/2;
 
         int boxXpos[] = {startX,startX+width,startX,startX+width};
@@ -128,7 +128,6 @@ private static CharacterClass currentHoveredClass;
                 }
             }
             else {
-                //if arrow type is false
                 if (!ptr.getAllArrTypes()[i]) {
                     if (SquareBoundingBoxTest(boxXpos[i], boxYpos[i], width / 2, height / 2)) {
                         return i;
@@ -145,9 +144,7 @@ private static CharacterClass currentHoveredClass;
             if (DominateOrDecease.getDoubleAttacker()) {
 
                 Player playerPtr = Player.getCurrentPlayer();
-                //attack bounding box
                 if (playerPtr.getActionPoints() >= 1 && playerPtr.getActionsLeft() >= 1 && SquareBoundingBoxTest((Window.getX(60 * Window.getWidth2() / 100) + Board.getCharacterBoxX() / 2), Window.getY(66 * Window.getHeight2() / 100) + Board.getCharacterBoxY() + 35, 120, 125)) {
-                    //always check druid first
                     if (Player.getCurrentPlayer().getCharacterClass().getName().equals("Druid")) {
                         Druid ptr = (Druid) Player.getCurrentPlayer().getCharacterClass();
                         if (ptr.isBear())
@@ -159,19 +156,12 @@ private static CharacterClass currentHoveredClass;
                     } else if (Player.getCurrentPlayer().getCharacterClass().getSelectingTile()[0] == 1) {
                         Mouse.setAttackTile(true);
                     }
-                    //return attack mode if you have the action points and actions available
-
-                    //get type from
                     return true;
                 }
             }
-            //boolean returns if the mouse is in attack mode
             Player playerPtr = Player.getCurrentPlayer();
-            //attack bounding box
             if (playerPtr.getActionPoints() >= 1 && playerPtr.getActionsLeft() >= 1 && SquareBoundingBoxTest((Window.getX(60 * Window.getWidth2() / 100) + Board.getCharacterBoxX() / 2), Window.getY(66 * Window.getHeight2() / 100) + Board.getCharacterBoxY() + 35, 120, 125)) {
-                //to ensure that they get the correct # of attacks
                 Player.getCurrentPlayer().getCharacterClass().resetAttackCount();
-                //always check druid first
                 if (Player.getCurrentPlayer().getCharacterClass().getName().equals("Druid")) {
                     Druid ptr = (Druid) Player.getCurrentPlayer().getCharacterClass();
                     if (ptr.isBear())
@@ -183,20 +173,15 @@ private static CharacterClass currentHoveredClass;
                 } else if (Player.getCurrentPlayer().getCharacterClass().getSelectingTile()[0] == 1) {
                     Mouse.setAttackTile(true);
                 }
-                //return attack mode if you have the action points and actions available
-
-                //get type from
                 return true;
             }
             if (playerPtr.getActionPoints() >= 1 && playerPtr.getActionsLeft() >= 1 && SquareBoundingBoxTest((Window.getX(60 * Window.getWidth2() / 100) + Board.getCharacterBoxX() / 2) + 240, Window.getY(66 * Window.getHeight2() / 100) + Board.getCharacterBoxY() + 40, 120, 125)) {
-                //return ability mode if you have the action points and actions available
                 if (Player.getCurrentPlayer().getCharacterClass().getSelectingTile()[1] == 1)
                     Mouse.setAttackTile(true);
                 else if (Player.getCurrentPlayer().getCharacterClass().getSelectingTile()[1] == 0)
                     Mouse.setAttackTile(false);
                 return true;
             }
-            //super box
             if (SquareBoundingBoxTest((Window.getX(70 * Window.getWidth2() / 100) + Board.getCharacterBoxX() / 8 - Window.getX(0) - 2), 325 + (Board.getCharacterBoxY() + 60), Board.getCharacterBoxX() / 2, Board.getCharacterBoxY() + 40)) {
                 if (Player.getCurrentPlayer().canSuper())
                     return true;
@@ -206,17 +191,14 @@ private static CharacterClass currentHoveredClass;
             if((SquareBoundingBoxTest((Window.getWidth2() / 2),Window.getYNormal(Window.getHeight2() / 6),190,90))){
                 return true;
             }
-            //add button Character
             else if((SquareBoundingBoxTest(Window.getWidth2()/2+100,Window.getYNormal(45*Window.getHeight2()/100)+50,50,20))){
                 return true;
             }
-            //subtract Button Character
             else if((SquareBoundingBoxTest(Window.getWidth2()/2-100,Window.getYNormal(45*Window.getHeight2()/100)+50,50,20))){
                 return true;
             }
             else {
                 for (int i = 0; i < Player.getNumPlayers(); i++) {
-                    //which box are you in for players
                     if (SquareBoundingBoxTest((CharSelectWholeBoxX[i])+CharSelectXchange, (CharSelectWholeBoxY[i]+CharSelectYchange), (int)(CharSelectXchange*1.5), (int) (CharSelectYchange*1.5))) {
                         return true;
                     }
@@ -224,7 +206,6 @@ private static CharacterClass currentHoveredClass;
             }
         }
         else{
-            //start button
             if((SquareBoundingBoxTest((Window.getWidth2() / 2),Window.getYNormal(Window.getHeight2() / 6),190,90))){
                 return true;
             }
@@ -232,13 +213,9 @@ private static CharacterClass currentHoveredClass;
         return false;
     }
     public static int boardClickChangeMouse(){
-        //double attacking classes, and have already attacked but not reseting attack counts
         if (DominateOrDecease.getDoubleAttacker()){
-
             Player playerPtr = Player.getCurrentPlayer();
-            //attack bounding box
             if(playerPtr.getActionPoints()>=1&&playerPtr.getActionsLeft()>=1&&SquareBoundingBoxTest((Window.getX(60 * Window.getWidth2() / 100)+Board.getCharacterBoxX()/2),Window.getY(66 * Window.getHeight2() / 100)+Board.getCharacterBoxY()+35,120,125)){
-                //always check druid first
                 if(Player.getCurrentPlayer().getCharacterClass().getName().equals("Druid")){
                     Druid ptr=(Druid)Player.getCurrentPlayer().getCharacterClass();
                     if(ptr.isBear())
@@ -252,19 +229,12 @@ private static CharacterClass currentHoveredClass;
                 else if(Player.getCurrentPlayer().getCharacterClass().getSelectingTile()[0]==1) {
                     Mouse.setAttackTile(true);
                 }
-                //return attack mode if you have the action points and actions available
-
-                //get type from
                 return 1;
             }
         }
-        //boolean returns if the mouse is in attack mode
         Player playerPtr = Player.getCurrentPlayer();
-        //attack bounding box
         if(playerPtr.getActionPoints()>=1&&playerPtr.getActionsLeft()>=1&&SquareBoundingBoxTest((Window.getX(60 * Window.getWidth2() / 100)+Board.getCharacterBoxX()/2),Window.getY(66 * Window.getHeight2() / 100)+Board.getCharacterBoxY()+35,120,125)){
-            //to ensure that they get the correct # of attacks
             Player.getCurrentPlayer().getCharacterClass().resetAttackCount();
-            //always check druid first
             if(Player.getCurrentPlayer().getCharacterClass().getName().equals("Druid")){
                 Druid ptr=(Druid)Player.getCurrentPlayer().getCharacterClass();
                 if(ptr.isBear())
@@ -278,25 +248,19 @@ private static CharacterClass currentHoveredClass;
             else if(Player.getCurrentPlayer().getCharacterClass().getSelectingTile()[0]==1) {
                 Mouse.setAttackTile(true);
             }
-            //return attack mode if you have the action points and actions available
-
-            //get type from
             return 1;
         }
         if(playerPtr.getActionPoints()>=1&&playerPtr.getActionsLeft()>=1&&SquareBoundingBoxTest((Window.getX(60 * Window.getWidth2() / 100)+Board.getCharacterBoxX()/2)+240,Window.getY(66 * Window.getHeight2() / 100)+Board.getCharacterBoxY()+40,120,125)){
-            //return ability mode if you have the action points and actions available
             if(Player.getCurrentPlayer().getCharacterClass().getSelectingTile()[1]==1)
                 Mouse.setAttackTile(true);
             else if(Player.getCurrentPlayer().getCharacterClass().getSelectingTile()[1]==0)
                 Mouse.setAttackTile(false);
             return 2;
         }
-        //super box
         if(SquareBoundingBoxTest((Window.getX(70 * Window.getWidth2() / 100)+Board.getCharacterBoxX()/8-Window.getX(0)-2), 325+(Board.getCharacterBoxY()+60),Board.getCharacterBoxX()/2,Board.getCharacterBoxY()+40)){
             if (Player.getCurrentPlayer().canSuper())
                 return 3;
         }
-        //maintain mouse type
         return Mouse.getAttackType();
     }
     public static void attackPlayer(boolean tile){
@@ -308,9 +272,7 @@ private static CharacterClass currentHoveredClass;
         } else
             upcast=1;
         if(tile){
-            //select tile to attack
             if(DominateOrDecease.getCurMouseHex()!=-1) {
-                ///SHIELD BLOCK
                 for (int a : Placeables.getShieldTile()){
                     if (a != Player.getCurrentPlayer().currTile()) {
                         if (DominateOrDecease.getCurMouseHex() == a) {
@@ -325,13 +287,10 @@ private static CharacterClass currentHoveredClass;
                         }
                     }
                 }
-                ////////////////
                 boolean inRange=false;
-                ////////////////if on the same tile or range is two
                 if((Player.getCurrentPlayer().getTileNum()==DominateOrDecease.getCurMouseHex())||(Player.getCurrentPlayer().getCharacterClass().getReach()==2)){
                     inRange=true;
                 }
-                ///////////////range is same tile and adjacent
                 if(Player.getCurrentPlayer().getCharacterClass().getReach()==1){
                     int[] adj=Tile.findAdjacent(Player.getCurrentPlayer().getTileNum(),true);
                     for(int i=0;i<adj.length;i++){
@@ -340,23 +299,15 @@ private static CharacterClass currentHoveredClass;
                     }
                 }
                 if(inRange) {
-                    //do the attack
                     Player.getCurrentPlayer().getCharacterClass().Attack(DominateOrDecease.getCurMouseHex());
-                    //minus everything needed
-
-                    //attack done, use points, reset attack count
                     Player.getCurrentPlayer().addActionPoints(-1-(upcast-1));
-
-                Player.getCurrentPlayer().resetActionsLeft(Player.getCurrentPlayer().getActionsLeft() - 1);
-
+                    Player.getCurrentPlayer().resetActionsLeft(Player.getCurrentPlayer().getActionsLeft() - 1);
                     Player.getCurrentPlayer().getCharacterClass().resetAttackCount();
-                    //go to mouse move now that you selected your target
                     Mouse.setAttackType(0,DominateOrDecease.getDoubleAttacker());
                 }
             }
         }
         else {
-            //attack object selected needing to select person
             if (Mouse.getAttackType() == 1 && !Mouse.isAttackTile()) {
                 if (selectPlayerToAttack() != null) {
                     for (int a : Placeables.getShieldTile()){
@@ -374,11 +325,9 @@ private static CharacterClass currentHoveredClass;
                         }
                     }
                     boolean inRange=false;
-                    ////////////////if on the same tile
                     if(Player.getCurrentPlayer().getTileNum()==selectPlayerToAttack().getTileNum()){
                         inRange=true;
                     }
-                    ///////////////range is same tile and adjacent
                     if( inRange||Player.getCurrentPlayer().getCharacterClass().getReach()==1){
                         int[] adj=Tile.findAdjacent(Player.getCurrentPlayer().getTileNum(),true);
                         for(int i=0;i<adj.length;i++){
@@ -386,13 +335,11 @@ private static CharacterClass currentHoveredClass;
                                 inRange=true;
                         }
                     }
-                    /////////everything is in range
                     else if (inRange||Player.getCurrentPlayer().getCharacterClass().getReach()==2 ){
                         inRange=true;
                     }
                     if(inRange) {
                         Player.getCurrentPlayer().getCharacterClass().Attack(selectPlayerToAttack());
-                        //working
                         if((Player.getCurrentPlayer().getCharacterClass().getName().equals("Monk"))){
                             Player.getCurrentPlayer().getCharacterClass().setAttackCount(Player.getCurrentPlayer().getCharacterClass().getAttackCount()-1);
                         }
@@ -402,25 +349,17 @@ private static CharacterClass currentHoveredClass;
                                 Player.getCurrentPlayer().getCharacterClass().setAttackCount(Player.getCurrentPlayer().getCharacterClass().getAttackCount() - 1);
                             }
                         }
-
-                        //make sure youn dont have to click again
                         MinusActions();
                     }
-                    /////////////////
                 }
-
             }
         }
     }
     public static boolean MinusActions(){
-        //minus action stuff
         if (Player.getCurrentPlayer().getCharacterClass().getAttackCount()<=0 && !DominateOrDecease.getDoubleAttacker()){
-            //attack done, use points, reset attack count
             Player.getCurrentPlayer().addActionPoints(-1-(upcast-1));
             Player.getCurrentPlayer().resetActionsLeft(Player.getCurrentPlayer().getActionsLeft() - 1);
-
             Player.getCurrentPlayer().getCharacterClass().resetAttackCount();
-            //go to mouse move now that you selected your target
             Mouse.setAttackType(0,DominateOrDecease.getDoubleAttacker());
             return true;
         }
@@ -472,15 +411,29 @@ private static CharacterClass currentHoveredClass;
         } else
             cannonLevel=1;
         Player.getCurrentPlayer().getCharacterClass().Ability();
-        //attack done, use points, reset attack count
         Player.getCurrentPlayer().addActionPoints(-cannonLevel);
         Player.getCurrentPlayer().resetActionsLeft(Player.getCurrentPlayer().getActionsLeft() - 1);
-
         Player.getCurrentPlayer().getCharacterClass().resetAttackCount();
-        //go to mouse move now that you selected your target
         Mouse.setAttackType(0,DominateOrDecease.getDoubleAttacker());
-
     }
+    public static void superPlayer(boolean tile){
+        if (tile){
+            if(DominateOrDecease.getCurMouseHex()!=-1) {
+                // existing super logic
+                Player.getCurrentPlayer().getCharacterClass().SuperMove();
+                Mouse.setAttackType(0,DominateOrDecease.getDoubleAttacker());
+            }
+        }
+        else {
+            Player.getCurrentPlayer().getCharacterClass().SuperMove();
+            Mouse.setAttackType(0,DominateOrDecease.getDoubleAttacker());
+        }
+    }
+    public static Player selectPlayerToAttack(){
+        // existing selection logic
+        return null;
+    }
+    public static boolean getTileAttack(){return tileAttack;}
 
     public static void superPlayer(boolean tile){
         if (tile){
@@ -495,7 +448,7 @@ private static CharacterClass currentHoveredClass;
                 Player.getCurrentPlayer().getCharacterClass().SuperMove();
                 //attack done, use points, reset attack count            Player.getCurrentPlayer().getCharacterClass().resetAttackCount();
                 //go to mouse move now that you selected your target
-                Mouse.setAttackType(0,DominateOrDecease.getDoubleAttacker());
+            Mouse.setAttackType(0,DominateOrDecease.getDoubleAttacker());
             }
 
             Player.getCurrentPlayer().getCharacterClass().SuperMove();
@@ -513,11 +466,11 @@ private static CharacterClass currentHoveredClass;
             Player.getCurrentPlayer().setAllOrbSections(false);
             Player.getCurrentPlayer().getCharacterClass().resetAttackCount();
             //go to mouse move now that you selected your target
-            Mouse.setAttackType(0,DominateOrDecease.getDoubleAttacker());
-        }
-    }
-
     public static Player selectPlayerToAttack(){
+        // existing selection logic
+        return null;
+    }
+    public static boolean getTileAttack(){return tileAttack;}
 
         ///
         for (int hex = 0; hex<Board.getAllTiles().length; hex++) {
@@ -587,7 +540,6 @@ private static CharacterClass currentHoveredClass;
         }
         return classes[randomNum];
     }
-
     //LB this is gonna have a lot of bounding boxes, 9 for each character - per player
     public static void ClickCSelect(int mouseX, int mouseY){
         MouseX=mouseX;

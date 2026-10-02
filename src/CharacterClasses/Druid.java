@@ -1,5 +1,4 @@
 
-
 public class Druid extends CharacterClass{
 
     private static final int FalconReach = 2;
@@ -85,12 +84,44 @@ public class Druid extends CharacterClass{
         }
         Player.getCurrentPlayer().MoveAnywhere(maxPlayerTile,false);
         Player[] ptr = Tile.getTile(maxPlayerTile).getPlayerPtrs();
+        }
+        Player.getCurrentPlayer().MoveAnywhere(maxPlayerTile,false);
+        Player[] ptr = Tile.getTile(maxPlayerTile).getPlayerPtrs();
         int damage=Dice.RollDie(3,6,2);
         for (int i = 0; i < ptr.length; i++){
             if(Player.getCurrentPlayer()!=ptr[i])
                 DealDamage(damage,ptr[i]);
         }
         SpikeGrowth spikes = new SpikeGrowth(Player.getCurrentPlayer().currTile(),1,Player.getCurrentPlayer());
+                DealDamage(damage,ptr[i]);
+        }
+        SpikeGrowth spikes = new SpikeGrowth(Player.getCurrentPlayer().currTile(),1,Player.getCurrentPlayer());
+    }
+    void EndTurn(){
+
+    }
+    //overiding
+    public int getReach(){
+        if(bear)
+            return reach;
+        else 
+            return FalconReach;
+    }
+    boolean isBear(){
+        return bear;
+    }
+    public int getAttackCount(){
+        return attackCount;
+    }
+    public void setAttackCount(int _setAttackCount){
+        attackCount = _setAttackCount;
+    }
+    public void resetAttackCount(){
+        if(bear)
+            attackCount = maxAttackCount;
+        else{
+            attackCount = 0;
+        }
     }
     void EndTurn(){
 

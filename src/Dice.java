@@ -73,6 +73,10 @@ public class Dice { //just need to put in images
     }
 
     public static void DrawDice(Graphics2D g) {
+        if (DominateOrDecease.gameOver) { //MainMenu.getMenuPhase()!=2
+            numDie = 0;
+            add=-1;
+        }
         for (int i = 0; i<numDie; i++) {
             if (sides == 6) {
                 staticDice[i] = sixDie[ranInt[i] -1];

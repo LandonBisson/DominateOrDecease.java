@@ -59,18 +59,17 @@ abstract class CharacterClass {
             targetedPlayers.add(ptr);
             numDamage= -(damage+tileDamageBoost);
             tileDamageBoost=0;
-    }
     public static void finalizeDamage(){
         for(int i = 0; i < targetedPlayers.size(); i++) {
             targetedPlayers.get(i).modifyHealth(Player.hitCheck(targetedPlayers.get(i),numDamage));
+            if(Player.getCurrentPlayer().getCharacterClass().getName().equals("Rogue"))
+                numHeal=-Player.hitCheck(targetedPlayers.get(i),numDamage);
         }
         Player.getCurrentPlayer().modifyHealth(numHeal);
         numHeal=0;
         numDamage=0;
         targetedPlayers.clear();
     }
-    public static void Heal(int healthAdd){
-        numHeal=healthAdd;
     }
     public static int RollDie(int NumDie, int DieSize,int add){
         int ret=0;

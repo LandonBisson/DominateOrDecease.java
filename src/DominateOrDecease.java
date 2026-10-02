@@ -5,12 +5,16 @@ import java.awt.event.*;
 import java.util.Arrays;
 import javax.swing.*;
 import javax.sound.sampled.*;
-
+//Write a short description of what you have been doing as well
+//Landon Bisson Time=87 hours (drawing pictures making code work a tad better)
+//Wesley Richey Time=26 hours (character classes and creating placeables and finilizing)
+//Niko Calabro Time=34 hours (dice and wizard/artiicer bounding boxes)
 public class DominateOrDecease extends JFrame implements Runnable {
     boolean animateFirstTime = true;
     Image image;
     Graphics2D g;
     static int MouseX;
+    static int testVal;
     static int MouseY;
     static int CurMouseHex;
     static final int frameRate = 20;
@@ -51,7 +55,6 @@ public class DominateOrDecease extends JFrame implements Runnable {
                         reset();
                     //main game clicking
                     if (MainMenu.getMenuPhase()==2) {
-                        ///after they select who they are hitting or what tile it needs to go bacl to mouse moving mode
                         Mouse.setAttackType(MainMenu.boardClickChangeMouse(), doubleAttacker);
                         if(Dice.isRolling()){
                             setInfoBoard("Wait for dice to roll!",1.5,Window.getHeight2()/2+200);
@@ -62,15 +65,6 @@ public class DominateOrDecease extends JFrame implements Runnable {
                         }
                         else if(MainMenu.moveModeButton()){
                             Mouse.setAttackType(0,doubleAttacker);
-                        }
-                        //in moving mode
-                        if (Mouse.getAttackType()==0 ){
-                            if (!doubleAttacker)
-                            //cannot move if you need to do your other attack
-                                Player.getCurrentPlayer().Move(CurMouseHex,false);
-                        }
-                        //in attacking mode
-                        else if(Mouse.getAttackType()==1){
                             MainMenu.attackPlayer(Mouse.isAttackTile());
                         }
                         else if(Mouse.getAttackType()==2){
@@ -80,9 +74,9 @@ public class DominateOrDecease extends JFrame implements Runnable {
                         }
                         else if(Mouse.getAttackType()==3){
                             if(Player.getCurrentPlayer().canSuper() && !doubleAttacker) {
-//                                Sounds.playCurrentSound(Player.getCurrentPlayer().getCharacterClass(), 2);
                                 MainMenu.superPlayer(Mouse.isAttackTile());
                             }
+                        }
                         }
                     }
                     //characterSelect
@@ -160,8 +154,8 @@ public class DominateOrDecease extends JFrame implements Runnable {
         g.setColor(Color.darkGray.darker());
         g.fillRect(0, 0, Window.xsize, Window.ysize);
 
-        int x[] = {Window.getX(0), Window.getX(Window.getWidth2()), Window.getX(Window.getWidth2()), Window.getX(0), Window.getX(0)};
-        int y[] = {Window.getY(0), Window.getY(0), Window.getY(Window.getHeight2()), Window.getY(Window.getHeight2()), Window.getY(0)};
+        int[] x = {Window.getX(0), Window.getX(Window.getWidth2()), Window.getX(Window.getWidth2()), Window.getX(0), Window.getX(0)};
+        int[] y = {Window.getY(0), Window.getY(0), Window.getY(Window.getHeight2()), Window.getY(Window.getHeight2()), Window.getY(0)};
 //fill border
         g.setColor(Color.darkGray);
         g.fillPolygon(x, y, 4);
@@ -182,7 +176,6 @@ public class DominateOrDecease extends JFrame implements Runnable {
         || (MainMenu.getMenuPhase()==2 && !MainMenu.getTileAttack() && MainMenu.selectPlayerToAttack()!=null && MainMenu.selectPlayerToAttack()!=Player.getCurrentPlayer())
         )
             setCursor(HAND_CURSOR);
-        /////
         //display next turn
         if (nextTurnTime>0){
             try{
@@ -260,6 +253,7 @@ public class DominateOrDecease extends JFrame implements Runnable {
         Images.reset();
         Placeables.Clear();
         displayRules = false;
+        mute = false;
     }
     /////////////////////////////////////////////////////////////////////////
     public void animate() {
@@ -405,6 +399,12 @@ public class DominateOrDecease extends JFrame implements Runnable {
             Board.drawAttacks(g,Player.getCurrentPlayer().getCharacterClass());
             Board.Draw(g,ptr);
             Dice.DrawDice(g);
+            if(displayRules){
+                Images.displayRules(g);
+            }
+            else{
+                Images.displayPressR(g);
+            }
         }
         else if(MainMenu.getMenuPhase()==1){
             displayRules=false;
@@ -414,6 +414,12 @@ public class DominateOrDecease extends JFrame implements Runnable {
         }
         else {
             Images.drawUI(g,ptr);
+            if(displayRules){
+                Images.displayRules(g);
+            }
+            else{
+                Images.displayPressR(g);
+            }
         }
     }
     public static void ReInitSounds(){

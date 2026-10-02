@@ -39,14 +39,22 @@ class Ranger extends CharacterClass {
 
     ////first is damage dealt, second is health healed, other effects can be called
     void Attack(int tile) {
+        if (superActivated == 2){
+            superActivated--;
+            arrType = 0;
+            Attack(tile);
+        }
+        else if (superActivated == 1){
+            arrType++;
+            if (arrType < 3)
+                Attack(tile);
+        }
         int arrHealCount = 0;
         modifier = 4 - Player.getNumAlivePlayers();
         if(modifier<0)
             modifier=0;
-        //if flame arrow
         if (arrType == 1)
             modifier += 3;
-        //if the super is meant to be activated
         if (superActivated > 0){
             //minus one to make it not repeat
             arrType = 4 - superActivated;
@@ -94,6 +102,12 @@ class Ranger extends CharacterClass {
             }
             arrHealCount+=diceRoll;
         }
+        ptr = Tile.getTile(currTile).getPlayerPtrs();
+        for (Player player : ptr) {
+            if (!(Player.getCurrentPlayer()==player))
+                DealDamage(diceRoll, player);
+            arrHealCount+=diceRoll;
+        }
         if (otherTile != -1) {
             ptr = Tile.getTile(otherTile).getPlayerPtrs();
             for (int i = 0; i < ptr.length; i++) {
@@ -103,7 +117,6 @@ class Ranger extends CharacterClass {
                 arrHealCount+=diceRoll;
             }
         }
-        //healing arrow used
         if(arrType == 3)
             Heal(arrHealCount/2);
         else{
@@ -150,7 +163,11 @@ class Ranger extends CharacterClass {
             Player.getCurrentPlayer().MoveAnywhere(currTile,false);
         }
         diceRoll=0;
-        arrType=0;
+        arrType--;
+        if (arrType < 0){
+            arrType = 0;
+            superActivated = 0;
+        }
     }
 
 
