@@ -8,49 +8,53 @@ class Tile extends Board {
     private int xpos;
     private int ypos;
     private int numPlayers;
-    private boolean SquareFull;
+    private static int []playerXpos=null;
+    private static int []playerYpos=null;
+    private static int spaceDif;
+    private boolean Full;
     private int tile;
+    private static Color[] tileColors=new Color[]{Color.white,Color.white,Color.white,Color.white,Color.white,Color.white,Color.white};
     Tile(int _xpos,int _ypos, int _tile)
     {
         tile=_tile;
         numPlayers=0;
         xpos=_xpos;
         ypos=_ypos;
-        SquareFull=false;
-    }
-    public void animate(){
-
+        Full=false;
     }
     public static void draw(Graphics2D g) {
         for (int i = 0; i < NUMHEX; i++) {
-            drawHexagon(g, allTiles[i].getXpos(), allTiles[i].getYpos(), 0, 1.0, 1.0, Color.green,true);
+            drawHexagon(g, allTiles[i].getXpos(), allTiles[i].getYpos(), 0, 1.0, 1.0, tileColors[i],true);
+            Images.drawTileImage(g, allTiles[i].getXpos(), allTiles[i].getYpos(),i);
             drawHexagon(g, allTiles[i].getXpos(), allTiles[i].getYpos(), 0, 1.0, 1.0, Color.BLACK,false);
+            //need to draw a placeable
+            Placeables.Draw(g);
         }
-        int spaceDif=50;
+        spaceDif=60;
+
         //goes through all tiles
         for (int i = 0; i < NUMHEX; i++) {
+            updatePlayerPiecePos(i);
             //for the number of plays on this i hex draw them
             for (int p=0;p<Tile.getTileNumPlayer(i);p++) {
                 //if there is only one player on this tile
                 if (Tile.getTileNumPlayer(i) == 1) {
-                    Player.drawOval(g, Board.getTileX(i), Board.getTileY(i), 0, 1, 1, Color.black, true);
-                } 
+                    try {
+                        Player.drawOval(g, Board.getTileX(i), Board.getTileY(i), 0, 1, 1, Color.black, true);
+                        Images.drawClassCircle(g, Tile.getTile(i).getPlayerPtrs()[p].getCharacterClass(), Board.getTileX(i), Board.getTileY(i), 0.0, 0.4, 0.4);
+                    }
+                    catch(Exception ArrayIndexOutOfBounds){
+
+                    }
+                }
                 //more than one player
                 else if (Tile.getTileNumPlayer(i) > 1) {
-                    if (p == 0) {
-                        Player.drawOval(g, Board.getTileX(i) - spaceDif, Board.getTileY(i) - spaceDif/2, 0, 1, 1, Color.black, true);
-                    } else if (p == 1) {
-                        Player.drawOval(g, Board.getTileX(i), Board.getTileY(i) - spaceDif/2, 0, 1, 1, Color.black, true);
-                    } else if (p == 2) {
-                        Player.drawOval(g, Board.getTileX(i) + spaceDif, Board.getTileY(i) - spaceDif/2, 0, 1, 1, Color.black, true);
+                    try {
+                        Player.drawOval(g, playerXpos[p], playerYpos[p], 0, 1, 1, Color.black, true);
+                        Images.drawClassCircle(g,Tile.getTile(i).getPlayerPtrs()[p].getCharacterClass(), playerXpos[p], playerYpos[p], 0.0, 0.4,0.4);
                     }
-                    //bottom 3
-                    else if (p == 3) {
-                        Player.drawOval(g, Board.getTileX(i) - spaceDif, Board.getTileY(i) + spaceDif/2, 0, 1, 1, Color.black, true);
-                    } else if (p == 4) {
-                        Player.drawOval(g, Board.getTileX(i), Board.getTileY(i) + spaceDif/2, 0, 1, 1, Color.black, true);
-                    } else {
-                        Player.drawOval(g, Board.getTileX(i) + spaceDif, Board.getTileY(i) + spaceDif/2, 0, 1, 1, Color.black, true);
+                    catch(Exception ArrayIndexOutOfBounds){
+
                     }
                 }
             }
@@ -75,6 +79,18 @@ class Tile extends Board {
         g.translate(-_xpos,-_ypos);
 
     }
+    public static int[] getPlayerXpos(int tile){
+        updatePlayerPiecePos(tile);
+        return playerXpos;
+    }
+    public static int[] getPlayerYpos(int tile){
+            updatePlayerPiecePos(tile);
+            return playerYpos;
+    }
+    private static void updatePlayerPiecePos(int tile){
+        playerXpos=new int[] {Board.getTileX(tile) - spaceDif,Board.getTileX(tile),Board.getTileX(tile) + spaceDif,Board.getTileX(tile) - spaceDif,Board.getTileX(tile),Board.getTileX(tile) + spaceDif};
+        playerYpos=new int[] {Board.getTileY(tile) - spaceDif/2,Board.getTileY(tile) - spaceDif/2,Board.getTileY(tile) - spaceDif/2,Board.getTileY(tile) + spaceDif/2,Board.getTileY(tile) + spaceDif/2,Board.getTileY(tile) + spaceDif/2};
+    }
     public int getXpos() {
         return xpos;
     }
@@ -94,12 +110,10 @@ class Tile extends Board {
     }
     public Player[] getPlayerPtrs(){
         ArrayList<Player> _players=new ArrayList<Player>();
-        for(int i=0;i<getNumPlayers();i++){
-            for(int t=0;t<Player.getNumPlayers();t++){
-                //if the player is one this tile
-                if(Player.getPlayer(t).getTileNum()==tile){
-                    _players.add(Player.getPlayer(t));
-                }
+        for(int t=0;t<Player.getNumPlayers();t++){
+            //if the player is one this tile
+            if(Player.getPlayer(t).getTileNum()==tile){
+                _players.add(Player.getPlayer(t));
             }
         }
         Player[] players=new Player[_players.size()];
@@ -107,6 +121,8 @@ class Tile extends Board {
             players[i]=_players.get(i);
         return players;
     }
+    public boolean isFull(){return Full;}
+    public void setFull(boolean _squareFull){Full=_squareFull;}
     public int getNumPlayers() {
         return numPlayers;
     }
@@ -114,7 +130,8 @@ class Tile extends Board {
         if (tileNum == -1){
             int[] byebye = {-1};
             return byebye;
-        }int[]ret;
+        }
+        int[]ret;
         if(countSameTile)
             ret = new int[4];
         else
@@ -138,5 +155,57 @@ class Tile extends Board {
         if(countSameTile)
             ret[3] = tileNum;
         return ret;
+    }
+    public static void runTileEffects(int tile){
+        Player.getCurrentPlayer().setDamageReduction(0);
+        if (tile == 0){
+           int random = (int)(Math.random()*4);
+           if(random != 0)
+               Player.getCurrentPlayer().setOrb(0);
+           else{
+//               Player.getCurrentPlayer().modifyHealth(-2);
+//               CharacterClass.tileDamageBoost = 1;
+           }
+           // add damage to next attack
+        }
+        if (tile == 1){
+           int random = (int)(Math.random()*4);
+           if(random != 0)
+               Player.getCurrentPlayer().setOrb(1);
+           else{
+//               Player.getCurrentPlayer().setCurrentActionsLeft(Player.getCurrentPlayer().getActionsLeft() + 1);
+//               Player.getCurrentPlayer().modifyHealth(-4);
+           }
+        }
+        if (tile == 2){
+            CharacterClass.tileDamageBoost = 1;
+        }
+        if (tile == 3){
+            Player.getCurrentPlayer().modifyHealth(3);
+        }
+        if (tile == 4){
+            Player.getCurrentPlayer().setDamageReduction(1);
+        }
+        if (tile == 5){
+           int random = (int)(Math.random()*4);
+           if(random != 0)
+               Player.getCurrentPlayer().setOrb(2);
+           else{
+//               Player.getCurrentPlayer().setCurrentActionsLeft(Player.getCurrentPlayer().getActionsLeft() - 1);
+//               Player.getCurrentPlayer().modifyHealth(4);
+           }
+        }
+        if (tile == 6){
+           int random = (int)(Math.random()*4);
+           if(random != 0)
+               Player.getCurrentPlayer().setOrb(3);
+           else{
+//               Player.getCurrentPlayer().modifyHealth(2);
+//               CharacterClass.tileDamageBoost = -1;
+           }
+        }
+    }
+    public void previousTileEffectsReset(){
+
     }
 }

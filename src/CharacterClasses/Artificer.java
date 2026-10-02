@@ -1,8 +1,12 @@
 class Artificer extends CharacterClass {
-    private static final int reach = 1;
     private static final String className = "Artificer";
+    //0 means its a person attack, 1 is a tile attack, and 2 is no attack or attack everyone(aka nothing passed in)
+    private static int[] _selectingTile={1,1,2};
+    private int superCount = 0;
+    private int cannonLevel;
     Artificer(){
-        super(className);
+        super(className,1,_selectingTile,0);
+        cannonLevel=1;
     }
 
     ///even indexes are names, odd indexes are decriptions
@@ -17,21 +21,50 @@ class Artificer extends CharacterClass {
     }
 
     String[] getSuperMoveName() {
-        String[] superMove = {"Super Cannon", "Create an Auto Cannon on every tile with 5 health instead of 3."};
+        String[] superMove = {"Time Distortion", "Get 2 action points now, and at the end of your next two turns"};
         return superMove;
     }
 ////
 
     ////first is damage dealt, second is health healed, other effects can be called
-    void Attack() {
-        //DealDamage(RollDie(1,6,0),0);
-    }
 
     void  Ability() {
+        if(!Tile.getTile(Player.getCurrentPlayer().currTile()).isFull()) {
+            Cannon ptr = new Cannon(Player.getCurrentPlayer().currTile(), 2, cannonLevel, Player.getCurrentPlayer());
+            cannonLevel = 1;
+        }
+        else{
+            Player.getCurrentPlayer().addActionPoints(cannonLevel);
+            Player.getCurrentPlayer().resetActionsLeft(Player.getCurrentPlayer().getActionsLeft()+1);
+        }
     }
 
     void SuperMove() {
+        Player.getCurrentPlayer().addActionPoints(2);
+        superCount = 2;
     }
+    void EndTurn(){
+        if (superCount > 0) {
+            Player.getCurrentPlayer().addActionPoints(2);
+            superCount--;
+        }
+    }
+
+    void Attack(int tile) {
+        int dam=Dice.RollDie(1,2,0);
+        for (Player ptr : Tile.getTile(tile).getPlayerPtrs())
+            DealDamage(dam,ptr);
+        if(!Tile.getTile(Player.getCurrentPlayer().currTile()).isFull()) {
+            Poison ptr = new Poison(tile, 1, Player.getCurrentPlayer());
+        }
+    }
+    void setCannonLevel(int level){
+        cannonLevel = level;
+    }
+    int cannonLevel(){
+        return cannonLevel;
+    }
+
 ////
 
 

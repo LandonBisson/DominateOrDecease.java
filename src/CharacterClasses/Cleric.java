@@ -1,9 +1,10 @@
 class Cleric extends CharacterClass{
-    private static final int reach = 1;
     private static final String className = "Cleric";
+    private int countdown;
+    //0 means its a person attack, 1 is a tile attack, and 2 is no attack or attack everyone(aka nothing passed in)
+    private static int[] _selectingTile={0,2,2};
     Cleric(){
-        super(className);
-
+        super(className,1,_selectingTile,0);
     }
 
 
@@ -26,13 +27,32 @@ class Cleric extends CharacterClass{
 
     ////first is damage dealt, second is health healed, other effects can be called
     void Attack(Player ptr) {
-        DealDamage(RollDie(1,4,2),ptr);
+        DealDamage(Dice.RollDie(1,4,2),ptr);
     }
 
     void Ability() {
+        if (countdown<= 0) {
+            countdown=2;
+            Heal(Dice.RollDie(3, 6, 0));
+        }
+        else {
+            countdown=2;
+            Heal(Dice.RollDie(1, 6, 0));
+        }
     }
 
     void SuperMove() {
+        Player.getCurrentPlayer().setMaxHealth(Player.getCurrentPlayer().getMaxHealth()+5);
+        Heal(Dice.RollDie(3,6,0));
+        Player[] ptr = Tile.getTile(Player.getCurrentPlayer().currTile()).getPlayerPtrs();
+        for (int i = 0; i < ptr.length; i++){
+            if(ptr[i]!=Player.getCurrentPlayer())
+                DealDamage(4,ptr[i]);
+        }
+    }
+
+    void EndTurn(){
+        countdown--;
     }
 ////
 

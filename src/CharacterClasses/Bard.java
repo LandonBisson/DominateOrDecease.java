@@ -1,16 +1,16 @@
 class Bard extends CharacterClass {
     private int damageMod;
-    private static final int reach = 1;
     private static final String className = "Bard";
-
+    //0 means its a person attack, 1 is a tile attack, and 2 is no attack or attack everyone(aka nothing passed in)
+    private static int[] _selectingTile={1,2,2};
     Bard(){
-        super(className);
+        super(className,1,_selectingTile,1);
     }
 
 
     ///even indexes are names, odd indexes are decriptions
     String[] getAttackName() {
-            String[] attacks = {"Push", "Push an enemy one tile and deal 3-6 damage."};
+            String[] attacks = {"Percussion Push", "Push an enemy one tile and deal 3-6 damage."};
             return attacks;
     }
 
@@ -20,26 +20,67 @@ class Bard extends CharacterClass {
     }
 
     String[] getSuperMoveName() {
-        String[] superMove = {"Supersonic", "Push every character 2 tiles and deal 3-8 damage. Also, gain immunity for next 2 turns."};
+        String[] superMove = {"Supersonic Waves", "Push every character 2 tiles and deal 3-8 damage. Also, gain immunity for next 2 turns."};
         return superMove;
     }
 ////
 
     ////first is damage dealt, second is health healed, other effects can be called
-    void Attack() {
-        //WR write an if statement here to test if a player is on the same tile, then push them
-        //DealDamage((int)(RollDie(1,4,2))+damageMod,reach);
+    void Attack(int tile) {
+        tile=Player.getCurrentPlayer().currTile();
+        Player[] ptr = Tile.getTile(tile).getPlayerPtrs();
+        int damage=Dice.RollDie(1,6,damageMod);
+        for (Player rtp : ptr) {
+            if (!(rtp.equals(Player.getCurrentPlayer())))
+                DealDamage(damage, rtp);
+        }
+
+        int[] tiles = Tile.findAdjacent(tile,false);
+        for (Player value : ptr){
+            int ranTile=tiles[(int)(Math.random()*tiles.length)];
+            value.MoveAnywhere(ranTile, false);
+        }
+        Player.getCurrentPlayer().MoveAnywhere(tile,false);
+
         if (damageMod == 2)
             damageMod = 0;
-
     }
-
     void Ability() {
         damageMod = 2;
-        Heal((RollDie(1,6,2)));
+        Heal(Dice.RollDie(1,6,0));
     }
 
     void SuperMove() {
+        int[] tempArray = {0, 1, 2, 3, 4, 5, 6};
+        int oppTile = -1;
+        if (Player.getCurrentPlayer().currTile() != 3) {
+            if (Player.getCurrentPlayer().currTile() < 3)
+                oppTile = tempArray[tempArray.length - Player.getCurrentPlayer().currTile() - 1];
+            else if (Player.getCurrentPlayer().currTile() > 3)
+                oppTile = tempArray[3 - (Player.getCurrentPlayer().currTile() - 3)];
+        }
+        else{
+            int tile=Player.getCurrentPlayer().currTile();
+            Player[] ptr = Tile.getTile(tile).getPlayerPtrs();
+            int[] tiles = Tile.findAdjacent(tile,false);
+            for (Player value : ptr){
+                int ranTile=tiles[(int)(Math.random()*tiles.length)];
+                value.MoveAnywhere(ranTile, false);
+            }
+            Player.getCurrentPlayer().MoveAnywhere(tile,false);
+        }
+        int damage = Dice.RollDie(2,6,damageMod);
+        if (oppTile != -1) {
+            for(int i=0;i<Player.getNumPlayers();i++){
+                if(!Player.getPlayer(i).equals(Player.getCurrentPlayer())){
+                    if(Player.getCurrentPlayer().currTile() != 3)
+                        Player.getPlayer(i).MoveAnywhere(oppTile,false);
+                    DealDamage(damage,Player.getPlayer(i));
+                }
+            }
+        }
+    }
+    void EndTurn(){
 
     }
 ////

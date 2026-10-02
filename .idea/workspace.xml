@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b14a9bb7-0a96-4692-a4e7-06412db95361" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Cannon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Poison.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Shield.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SpikeGrowth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DominateOrDecease.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DominateOrDecease.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Artificer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Artificer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Barbarian.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Barbarian.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Bard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Bard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Cleric.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Cleric.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Druid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Druid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Monk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Monk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Ranger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Ranger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Rogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Rogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CharacterClasses/Wizard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CharacterClasses/Wizard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Class.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Class.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DominateOrDecease.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DominateOrDecease.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Images.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Images.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Images/DominateOrDecease.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/Images/DominateOrDecease.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Window.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "LandonBisson"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/LandonBisson/DominateOrDecease.java.git",
+    "accountId": "c384a097-ca81-45db-b98a-89b3b3f8104a"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="36nN8kX2QNK4IOmhEgbcNcWlU8t" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DominateOrDecease.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/landonbisson/Desktop/DominateOrDecease"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="DominateOrDecease" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DominateOrDecease" />
+      <module name="DominateOrDecease" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DominateOrDecease" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b14a9bb7-0a96-4692-a4e7-06412db95361" name="Changes" comment="" />
+      <created>1765638219117</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765638219117</updated>
+    </task>
+    <servers />
+  </component>
+</project>
