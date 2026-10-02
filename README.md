@@ -63,7 +63,7 @@ Dominate Or Decease is an original game with an original and complex rule set.
 
 ## Installation
 ```bash
-git clone https://github.com/nikocalabro/dominate-or-decease.git
+git clone https://github.com/landonbisson/dominate-or-decease.git
 ```
 
 ## Repository Structure
